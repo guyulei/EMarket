@@ -55,14 +55,13 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    class MyAdapter extends FragmentPagerAdapter{
+    class MyAdapter extends FragmentPagerAdapter {
 
         private final String[] mStrings;
 
         public MyAdapter(FragmentManager fm) {
             super(fm);
             mStrings = UIUtils.getStrings(R.array.tab_names);
-
         }
 
         @Override

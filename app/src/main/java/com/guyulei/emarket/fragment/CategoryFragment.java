@@ -17,6 +17,6 @@ public class CategoryFragment extends BaseFragment {
 
     @Override
     public LoadingPage.ResultState onLoadNetData() {
-        return null;
+        return LoadingPage.ResultState.EMPTY_STATE;
     }
 }

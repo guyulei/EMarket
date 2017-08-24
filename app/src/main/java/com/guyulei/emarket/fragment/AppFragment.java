@@ -17,6 +17,6 @@ public class AppFragment extends BaseFragment {
 
     @Override
     public LoadingPage.ResultState onLoadNetData() {
-        return null;
+        return LoadingPage.ResultState.ERROR_STATE;
     }
 }

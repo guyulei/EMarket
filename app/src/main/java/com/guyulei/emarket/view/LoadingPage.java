@@ -60,7 +60,6 @@ public abstract class LoadingPage extends FrameLayout {
             mLoadingEmpty = UIUtils.inflat(R.layout.page_loading_empty);
             addView(mLoadingEmpty);
         }
-
         showRightPage();
     }
 
@@ -97,6 +96,7 @@ public abstract class LoadingPage extends FrameLayout {
                         @Override
                         public void run() {
                             if (resultState != null) {
+                                //根据 网络结果 刷新 ui
                                 mCurrentState = resultState.getState();
                                 showRightPage();
                             }
