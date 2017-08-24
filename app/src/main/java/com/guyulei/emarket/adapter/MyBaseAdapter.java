@@ -30,7 +30,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mData.size() + 1;
+        return mData.size() + 1;//加载更多布局
     }
 
     @Override
@@ -70,7 +70,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
                 baseHolder = new MoreHolder(hasMore());
             } else {
                 //普通 布局
-                baseHolder = getViewHolde();
+                baseHolder = getViewHolde();//子类实现
             }
         } else {
             baseHolder = (MyBaseHolder) convertView.getTag();
@@ -106,8 +106,8 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
                         @Override
                         public void run() {
                             if (moreData != null) {
-                                //有更多数据
-                                if (moreData.size() < 20) {
+                                //有更多数据    一页10条数据
+                                if (moreData.size() < 10) {
                                     moreHolder.setData(MoreHolder.MORE_STATE_NONE);
                                     Toast.makeText(UIUtils.getContext(), "没有更多数据了", Toast.LENGTH_SHORT).show();
                                 } else {

@@ -62,10 +62,10 @@ public class HomeFragment extends BaseFragment {
         public ArrayList<String> loadMoreData() {
 
             ArrayList<String> datas = new ArrayList<>();
-            for (int i = 0; i <18; i++) {
+            for (int i = 0; i < 4; i++) {
                 datas.add("haha" + i);
             }
-            SystemClock.sleep(2000);
+            SystemClock.sleep(1000);
             return datas;
         }
     }

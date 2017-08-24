@@ -9,11 +9,11 @@ import android.view.View;
 public abstract class MyBaseHolder<T> {
 
     public  T    mData;
-    private View mRootView;//item 跟布局
+    private View mRootView;//item 根布局
 
     public MyBaseHolder() {
         //子类加载布局  findid
-        mRootView = initLayout();
+        mRootView = initLayout();//子类实现 加载布局 并 findviewbyid
         //加入tag
         mRootView.setTag(this);
     }
