@@ -5,15 +5,17 @@
               android:gravity="center"
               android:orientation="vertical">
 
-    <ProgressBar
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateDrawable="@drawable/custom_progressbar"/>
+        android:src="@mipmap/logo"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="正在加载数据"
+        android:background="@drawable/btn_bg"
+        android:padding="5dp"
+        android:text="暂无数据"
         android:textColor="@color/colorAccent"/>
 </LinearLayout>
