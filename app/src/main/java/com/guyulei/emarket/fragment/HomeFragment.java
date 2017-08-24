@@ -1,5 +1,6 @@
 package com.guyulei.emarket.fragment;
 
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.ListView;
 
@@ -40,7 +41,13 @@ public class HomeFragment extends BaseFragment {
         return listView;
     }
 
+
     public class MyAdapter extends MyBaseAdapter<String> {
+
+        @Override
+        public boolean hasMore() {
+            return true;
+        }
 
         public MyAdapter(ArrayList data) {
             super(data);
@@ -49,6 +56,17 @@ public class HomeFragment extends BaseFragment {
         @Override
         public MyBaseHolder<String> getViewHolde() {
             return new HomeHolder();
+        }
+
+        @Override
+        public ArrayList<String> loadMoreData() {
+
+            ArrayList<String> datas = new ArrayList<>();
+            for (int i = 0; i <18; i++) {
+                datas.add("haha" + i);
+            }
+            SystemClock.sleep(2000);
+            return datas;
         }
     }
 }
