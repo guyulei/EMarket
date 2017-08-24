@@ -18,19 +18,33 @@ import com.guyulei.emarket.view.LoadingPage;
 public abstract class BaseFragment extends Fragment {
 
     private static final String ACTIVITY_TAG = "guyulei";
+    private LoadingPage mLoadingPage;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LoadingPage loadingPage = new LoadingPage(UIUtils.getContext()) {
+        mLoadingPage = new LoadingPage(UIUtils.getContext()) {
             @Override
             public View onCreateSuccess() {
                 return onCreateSuccessView();
             }
+
+            @Override
+            protected ResultState initNetData() {
+                return onLoadNetData();
+            }
         };
         Log.e(ACTIVITY_TAG, getClass().getSimpleName());
-        return loadingPage;
+        return mLoadingPage;
     }
 
     public abstract View onCreateSuccessView();
+
+    public abstract LoadingPage.ResultState onLoadNetData();
+
+    public void loadNetData() {
+        if (mLoadingPage != null) {
+            mLoadingPage.loadData();
+        }
+    }
 }

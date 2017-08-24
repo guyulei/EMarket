@@ -68,13 +68,58 @@ public abstract class LoadingPage extends FrameLayout {
         mLoadingPage.setVisibility((mCurrentState == STATE_LOADING_UNDO || mCurrentState == STATE_LOADING_LOADING) ? View.VISIBLE : View.GONE);
         mLoadingError.setVisibility((mCurrentState == STATE_LOADING_ERROR) ? View.VISIBLE : View.GONE);
         mLoadingEmpty.setVisibility((mCurrentState == STATE_LOADING_EMPTY) ? View.VISIBLE : View.GONE);
-        if (mLoadingSuccess == null) {
+
+        if (mLoadingSuccess == null && mCurrentState == STATE_LOADING_SUCCESS) {
             mLoadingSuccess = onCreateSuccess();
             if (mLoadingSuccess != null) {
                 addView(mLoadingSuccess);
             }
         }
+
+        if (mLoadingSuccess != null) {
+            mLoadingSuccess.setVisibility((mCurrentState == STATE_LOADING_SUCCESS) ? View.VISIBLE : View.GONE);
+        }
     }
 
     public abstract View onCreateSuccess();
+
+    //加载数据
+    public void loadData() {
+        if (mCurrentState != STATE_LOADING_LOADING) {
+            mCurrentState = STATE_LOADING_LOADING;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //子线程 网络 请求
+                    final ResultState resultState = initNetData();
+                    //主线程 更新 ui
+                    UIUtils.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (resultState != null) {
+                                mCurrentState = resultState.getState();
+                                showRightPage();
+                            }
+                        }
+                    });
+                }
+            }).start();
+        }
+    }
+
+    //网络 返回结果  并分析
+    protected abstract ResultState initNetData();
+
+    public enum ResultState {
+        SUCCESS_STATE(STATE_LOADING_SUCCESS), EMPTY_STATE(STATE_LOADING_EMPTY), ERROR_STATE(STATE_LOADING_ERROR);
+        private int mState;
+
+        private ResultState(int state) {
+            this.mState = state;
+        }
+
+        public int getState() {
+            return mState;
+        }
+    }
 }
