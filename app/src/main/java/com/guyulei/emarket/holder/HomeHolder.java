@@ -4,13 +4,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.guyulei.emarket.R;
+import com.guyulei.emarket.bean.AppInfo;
 import com.guyulei.emarket.utils.UIUtils;
 
 /**
  * Created by A on 2017/8/24.
  */
 
-public class HomeHolder extends MyBaseHolder<String> {
+public class HomeHolder extends MyBaseHolder<AppInfo> {
 
     private TextView mText;
 
@@ -22,7 +23,7 @@ public class HomeHolder extends MyBaseHolder<String> {
     }
 
     @Override
-    public void refreshView(String data) {
-        mText.setText(data);
+    public void refreshView(AppInfo data) {
+        mText.setText(data.getName());
     }
 }

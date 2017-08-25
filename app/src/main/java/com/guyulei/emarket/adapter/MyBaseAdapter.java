@@ -107,7 +107,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
                         public void run() {
                             if (moreData != null) {
                                 //有更多数据    一页10条数据
-                                if (moreData.size() < 10) {
+                                if (moreData.size() < 20) {
                                     moreHolder.setData(MoreHolder.MORE_STATE_NONE);
                                     Toast.makeText(UIUtils.getContext(), "没有更多数据了", Toast.LENGTH_SHORT).show();
                                 } else {

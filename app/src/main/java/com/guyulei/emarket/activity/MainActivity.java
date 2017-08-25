@@ -1,6 +1,7 @@
 package com.guyulei.emarket.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,17 +12,16 @@ import com.guyulei.emarket.base.BaseActivity;
 import com.guyulei.emarket.fragment.BaseFragment;
 import com.guyulei.emarket.fragment.FragmentFactory;
 import com.guyulei.emarket.utils.UIUtils;
-import com.guyulei.emarket.view.PagerTab;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
 
-    @BindView(R.id.pagertab)
-    PagerTab  mPagertab;
     @BindView(R.id.viewpage)
     ViewPager mViewpage;
+    @BindView(R.id.tabLayout)
+    TabLayout mTabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,23 +33,24 @@ public class MainActivity extends BaseActivity {
 
     private void initview() {
         MyAdapter myAdapter = new MyAdapter(getSupportFragmentManager());
+
+        mTabLayout.setupWithViewPager(mViewpage);
         mViewpage.setAdapter(myAdapter);
-        mPagertab.setViewPager(mViewpage);
-        mPagertab.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
+            public void onTabSelected(TabLayout.Tab tab) {
                 //获取 当前页 fragment
-                BaseFragment fragment = FragmentFactory.createFragment(position);
+                BaseFragment fragment = FragmentFactory.createFragment(tab.getPosition());
                 fragment.loadNetData();
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });

@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class FragmentFactory {
 
-    public static HashMap<Integer, BaseFragment> mHashMap = new HashMap<>();
+    private static HashMap<Integer, BaseFragment> mHashMap = new HashMap<>();
 
     public static BaseFragment createFragment(int postion) {
         BaseFragment fragment = mHashMap.get(postion);

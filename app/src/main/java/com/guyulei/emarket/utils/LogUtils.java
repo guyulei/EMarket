@@ -17,7 +17,7 @@ public class LogUtils {
 	public static final int LEVEL_VERBOSE = 5;
 
 	/** 日志输出时的TAG */
-	private static String mTag = "LogUtils";
+	private static String mTag = "guyulei";
 	/** 是否允许输出log */
 	private static int mDebuggable = LEVEL_ERROR;
 

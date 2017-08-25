@@ -23,9 +23,7 @@ public abstract class LoadingPage extends FrameLayout {
     public static final int STATE_LOADING_ERROR   = 3;//加载失败
     public static final int STATE_LOADING_EMPTY   = 4;//数据为空
     public static final int STATE_LOADING_SUCCESS = 5;//加载成功
-
-
-    public int mCurrentState = STATE_LOADING_UNDO;
+    public              int mCurrentState         = STATE_LOADING_UNDO;
     private View mLoadingPage;
     private View mLoadingError;
     private View mLoadingEmpty;
@@ -74,7 +72,6 @@ public abstract class LoadingPage extends FrameLayout {
                 addView(mLoadingSuccess);
             }
         }
-
         if (mLoadingSuccess != null) {
             mLoadingSuccess.setVisibility((mCurrentState == STATE_LOADING_SUCCESS) ? View.VISIBLE : View.GONE);
         }

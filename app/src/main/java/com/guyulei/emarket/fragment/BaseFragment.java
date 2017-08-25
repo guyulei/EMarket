@@ -3,13 +3,14 @@ package com.guyulei.emarket.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.guyulei.emarket.utils.UIUtils;
 import com.guyulei.emarket.view.LoadingPage;
+
+import java.util.ArrayList;
 
 /**
  * Created by 12539 on 2017/8/24.
@@ -34,7 +35,6 @@ public abstract class BaseFragment extends Fragment {
                 return onLoadNetData();
             }
         };
-        Log.e(ACTIVITY_TAG, getClass().getSimpleName());
         return mLoadingPage;
     }
 
@@ -46,5 +46,19 @@ public abstract class BaseFragment extends Fragment {
         if (mLoadingPage != null) {
             mLoadingPage.loadData();
         }
+    }
+
+    public LoadingPage.ResultState checkData(Object obj) {
+        if (obj != null) {
+            if (obj instanceof ArrayList) {
+                ArrayList list = (ArrayList) obj;
+                if (!list.isEmpty()) {
+                    return LoadingPage.ResultState.SUCCESS_STATE;
+                } else {
+                    return LoadingPage.ResultState.EMPTY_STATE;//暂无数据
+                }
+            }
+        }
+        return LoadingPage.ResultState.ERROR_STATE;
     }
 }
