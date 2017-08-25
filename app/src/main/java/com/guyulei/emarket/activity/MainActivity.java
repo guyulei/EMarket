@@ -12,6 +12,9 @@ import com.guyulei.emarket.base.BaseActivity;
 import com.guyulei.emarket.fragment.BaseFragment;
 import com.guyulei.emarket.fragment.FragmentFactory;
 import com.guyulei.emarket.utils.UIUtils;
+import com.guyulei.emarket.view.PagerTab;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +25,9 @@ public class MainActivity extends BaseActivity {
     ViewPager mViewpage;
     @BindView(R.id.tabLayout)
     TabLayout mTabLayout;
+    @BindView(R.id.pagerTab)
+    PagerTab  mPagerTab;
+    private String[] mStrings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +38,33 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initview() {
-        MyAdapter myAdapter = new MyAdapter(getSupportFragmentManager());
+        mStrings = UIUtils.getStrings(R.array.tab_names);
+        ArrayList<BaseFragment> fragments = new ArrayList<>();
 
-        mTabLayout.setupWithViewPager(mViewpage);
+
+        MyAdapter myAdapter = new MyAdapter(getSupportFragmentManager());
         mViewpage.setAdapter(myAdapter);
+        mPagerTab.setViewPager(mViewpage);
+        mPagerTab.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //获取 当前页 fragment
+                BaseFragment fragment = FragmentFactory.createFragment(position);
+                fragment.loadNetData();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        /*mTabLayout.setupWithViewPager(mViewpage);
+        mTabLayout.getTabAt(1).select();
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -53,16 +82,15 @@ public class MainActivity extends BaseActivity {
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
-        });
+        });*/
     }
 
     class MyAdapter extends FragmentPagerAdapter {
 
-        private final String[] mStrings;
 
         public MyAdapter(FragmentManager fm) {
             super(fm);
-            mStrings = UIUtils.getStrings(R.array.tab_names);
+
         }
 
         @Override

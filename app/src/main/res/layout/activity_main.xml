@@ -8,6 +8,14 @@
     android:orientation="vertical"
     tools:context="com.guyulei.emarket.activity.MainActivity">
 
+
+    <com.guyulei.emarket.view.PagerTab
+       android:id="@+id/pagerTab"
+        android:layout_width="match_parent"
+        android:layout_height="42dp">
+
+    </com.guyulei.emarket.view.PagerTab>
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"

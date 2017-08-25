@@ -7,6 +7,7 @@ import com.guyulei.emarket.adapter.MyBaseAdapter;
 import com.guyulei.emarket.bean.AppInfo;
 import com.guyulei.emarket.holder.HomeHolder;
 import com.guyulei.emarket.holder.MyBaseHolder;
+import com.guyulei.emarket.http.HomeProtocol;
 import com.guyulei.emarket.utils.UIUtils;
 import com.guyulei.emarket.view.LoadingPage.ResultState;
 
@@ -26,10 +27,10 @@ public class HomeFragment extends BaseFragment {
     //获取 数据 成功后 会刷新ui  回调onCreateSuccessView() 方法
     @Override
     public ResultState onLoadNetData() {
-        /*HomeProtocol homeProtocol = new HomeProtocol();
-        mData = homeProtocol.getData(0);*/
-        //return checkData(mData);
-        return ResultState.EMPTY_STATE;
+        HomeProtocol homeProtocol = new HomeProtocol();
+        mData = homeProtocol.getData(0);
+        return checkData(mData);
+        //return ResultState.EMPTY_STATE;
     }
 
     //本身 运行在 主线程
